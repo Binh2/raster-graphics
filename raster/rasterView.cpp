@@ -95,7 +95,11 @@ void CrasterView::OnDraw(CDC* pDC)
 	CEllipse::MidPointEllipse(pDC, 100, 100, 100, 100, RGB(0, 255, 0));
 	//CFill::BoundaryFill(pDC, 200, 100, RGB(0, 255, 0), RGB(255, 0, 0));
 	//CFill::BoundaryFillEnhanced(pDC, 100, 100, RGB(0, 255, 0), RGB(255, 0, 0));
-	CFill::ScanLineFill(pDC, std::vector<int>{100, 200, 300}, std::vector<int>{200, 300, 100}, RGB(255, 0, 0));
+	CPolygon polygon;
+	polygon.Add(CPoint(100, 200));
+	polygon.Add(CPoint(200, 300));
+	polygon.Add(CPoint(300, 100));
+	CFill::ScanLineFill(pDC, polygon, RGB(255, 0, 0));
 	/*CEllipse::MidPointEllipse(pDC, 200, 200, 50, 100, RGB(0, 0, 255));*/
 	
 	//CShape::Hexagon(pDC, 100, 100, 50, RGB(255, 0, 0));
