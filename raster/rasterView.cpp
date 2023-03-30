@@ -52,6 +52,9 @@ BOOL CrasterView::PreCreateWindow(CREATESTRUCT& cs)
 // CrasterView drawing
 #include "CLine.h"
 #include "CCircle.h"
+#include "CEllipse.h"
+#include "CFill.h"
+#include "CShape.h"
 void CrasterView::OnDraw(CDC* pDC)
 {
 	CrasterDoc* pDoc = GetDocument();
@@ -60,33 +63,44 @@ void CrasterView::OnDraw(CDC* pDC)
 		return;
 
 	// TODO: add draw code for native data here
-	int offsetX = 0, offsetY = 0;
-	CLine::DDALine(pDC, offsetX, offsetY, offsetX + 100, offsetY + 100, RGB(255, 0, 0));
-	CLine::DDALine(pDC, offsetX, offsetY, offsetX + 100, offsetY + 200, RGB(0, 255, 0));
-	CLine::DDALine(pDC, offsetX, offsetY, offsetX + 200, offsetY + 100, RGB(0, 0, 255));
+	//int offsetX = 0, offsetY = 0;
+	//CLine::DDALine(pDC, offsetX, offsetY, offsetX + 100, offsetY + 100, RGB(255, 0, 0));
+	//CLine::DDALine(pDC, offsetX, offsetY, offsetX + 100, offsetY + 200, RGB(0, 255, 0));
+	//CLine::DDALine(pDC, offsetX, offsetY, offsetX + 200, offsetY + 100, RGB(0, 0, 255));
 
-	// Draw DDA line in opposite direction than the previous 3
-	offsetY = 250;
-	CLine::DDALine(pDC, offsetX + 100, offsetY + 100, offsetX, offsetY, RGB(255, 255, 0));
-	CLine::DDALine(pDC, offsetX + 100, offsetY + 200, offsetX, offsetY, RGB(0, 255, 255));
-	CLine::DDALine(pDC, offsetX + 200, offsetY + 100, offsetX, offsetY, RGB(255, 0, 255));
-
-
-	offsetX = 250; offsetY = 0;
-	CLine::BresenhamLine(pDC, offsetX, offsetY, offsetX + 100, offsetY + 100, RGB(255, 0, 0));
-	CLine::BresenhamLine(pDC, offsetX, offsetY, offsetX + 100, offsetY + 200, RGB(0, 255, 0));
-	CLine::BresenhamLine(pDC, offsetX, offsetY, offsetX + 200, offsetY + 100, RGB(0, 0, 255));
-
-	// Draw Bresenham line in opposite direction than the previous 3
-	offsetY = 250;
-	CLine::BresenhamLine(pDC, offsetX + 100, offsetY + 100, offsetX, offsetY, RGB(255, 255, 0));
-	CLine::BresenhamLine(pDC, offsetX + 100, offsetY + 200, offsetX, offsetY, RGB(0, 255, 255));
-	CLine::BresenhamLine(pDC, offsetX + 200, offsetY + 100, offsetX, offsetY, RGB(255, 0, 255));
+	//// Draw DDA line in opposite direction than the previous 3
+	//offsetY = 250;
+	//CLine::DDALine(pDC, offsetX + 100, offsetY + 100, offsetX, offsetY, RGB(255, 255, 0));
+	//CLine::DDALine(pDC, offsetX + 100, offsetY + 200, offsetX, offsetY, RGB(0, 255, 255));
+	//CLine::DDALine(pDC, offsetX + 200, offsetY + 100, offsetX, offsetY, RGB(255, 0, 255));
 
 
-	CCircle::MidPointCircle(pDC, 100, 100, 50, RGB(255, 0, 0));
-	CCircle::MidPointCircle(pDC, 200, 100, 100, RGB(0, 255, 0));
-	CCircle::MidPointCircle(pDC, 200, 200, 200, RGB(0, 0, 255));
+	//offsetX = 250; offsetY = 0;
+	//CLine::BresenhamLine(pDC, offsetX, offsetY, offsetX + 100, offsetY + 100, RGB(255, 0, 0));
+	//CLine::BresenhamLine(pDC, offsetX, offsetY, offsetX + 100, offsetY + 200, RGB(0, 255, 0));
+	//CLine::BresenhamLine(pDC, offsetX, offsetY, offsetX + 200, offsetY + 100, RGB(0, 0, 255));
+
+	//// Draw Bresenham line in opposite direction than the previous 3
+	//offsetY = 250;
+	//CLine::BresenhamLine(pDC, offsetX + 100, offsetY + 100, offsetX, offsetY, RGB(255, 255, 0));
+	//CLine::BresenhamLine(pDC, offsetX + 100, offsetY + 200, offsetX, offsetY, RGB(0, 255, 255));
+	//CLine::BresenhamLine(pDC, offsetX + 200, offsetY + 100, offsetX, offsetY, RGB(255, 0, 255));
+
+
+	//CCircle::MidPointCircle(pDC, 100, 100, 50, RGB(255, 0, 0));
+	//CCircle::MidPointCircle(pDC, 200, 100, 100, RGB(0, 255, 0));
+	//CCircle::MidPointCircle(pDC, 200, 200, 200, RGB(0, 0, 255));
+
+	/*CEllipse::MidPointEllipse(pDC, 100, 100, 100, 50, RGB(255, 0, 0));*/
+	CEllipse::MidPointEllipse(pDC, 100, 100, 100, 100, RGB(0, 255, 0));
+	//CFill::BoundaryFill(pDC, 200, 100, RGB(0, 255, 0), RGB(255, 0, 0));
+	//CFill::BoundaryFillEnhanced(pDC, 100, 100, RGB(0, 255, 0), RGB(255, 0, 0));
+	CFill::ScanLineFill(pDC, std::vector<int>{100, 200, 300}, std::vector<int>{200, 300, 100}, RGB(255, 0, 0));
+	/*CEllipse::MidPointEllipse(pDC, 200, 200, 50, 100, RGB(0, 0, 255));*/
+	
+	//CShape::Hexagon(pDC, 100, 100, 50, RGB(255, 0, 0));
+	//CShape::Pentagon(pDC, 200, 100, 50, RGB(0, 255, 0));
+	//CShape::Star(pDC, 100, 200, 50, RGB(0, 0, 255));
 }
 
 
